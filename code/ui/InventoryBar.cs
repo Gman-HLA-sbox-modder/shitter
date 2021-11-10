@@ -31,8 +31,7 @@ public class InventoryBar : Panel
 
 		SetClass( "active", IsOpen );
 
-		var player = Local.Pawn as Player;
-		if ( player == null ) return;
+		if ( Local.Pawn is not Player player ) return;
 
 		Weapons.Clear();
 		Weapons.AddRange( player.Children.Select( x => x as BaseDmWeapon ).Where( x => x.IsValid() && x.IsUsable() ) );

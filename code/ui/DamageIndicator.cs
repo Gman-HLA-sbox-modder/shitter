@@ -34,7 +34,7 @@ public partial class DamageIndicator : Panel
 		public override void Tick()
 		{
 			base.Tick();
-			
+
 			var wpos = CurrentView.Rotation.Inverse * ( Position.WithZ( 0 ) - CurrentView.Position.WithZ( 0 )).Normal;
 			wpos = wpos.WithZ( 0 ).Normal;
 
@@ -47,8 +47,6 @@ public partial class DamageIndicator : Panel
 			pt.AddRotation( 0, 0, angle.RadianToDegree() );
 
 			Style.Transform = pt;
-			Style.Dirty();
-			
 		}
 
 		async Task Lifetime()
@@ -58,8 +56,6 @@ public partial class DamageIndicator : Panel
 			await Task.Delay( 500 );
 			Delete();
 		}
-
-
 	}
 }
 

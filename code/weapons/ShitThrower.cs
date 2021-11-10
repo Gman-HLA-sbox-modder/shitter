@@ -39,7 +39,7 @@ partial class shitthrower : BaseDmWeapon
 	public void StartCharge()
 	{
 		// Change this to your charge particle. Make its life the same rate as your ChargeTime
-		ChargeParticles = Particles.Create( "particles/shit_buildup.vpcf", this, "muzzle" );
+		ChargeParticles = Particles.Create( "particles/shit_buildup.vpcf", this, "bone");
 	}
 
 	public void StopCharge()
@@ -47,7 +47,7 @@ partial class shitthrower : BaseDmWeapon
 		ChargeParticles?.Destroy( true );
 		TimeSinceChargeStart = 0;
 	}
-	
+
 	public override void AttackPrimary()
 	{
 		TimeSincePrimaryAttack = -0.5f;
@@ -59,27 +59,16 @@ partial class shitthrower : BaseDmWeapon
 			DryFire();
 			return;
 		}
-		
-		//
-		// Tell the clients to play the shoot effects
-		//
-		//ShootEffects();
-		//PlaySound( "shoot" );
 
-		//
-		// Shoot the bullets
-		//
-		//ShootBullet( 0.05f, 1.5f, 9.0f, 3.0f );
 		if (IsClient) return;
 		ShootShit();
-
 	}
 
 	public override void AttackSecondary()
     {
 	    if ( TimeSinceChargeStart < ChargeTime )
 		    return;
-		
+
 	    TimeSincePrimaryAttack = 0;
 	    TimeSinceChargeStart = 0;
 
@@ -88,7 +77,7 @@ partial class shitthrower : BaseDmWeapon
 		    DryFire();
 		    return;
 	    }
-		
+
 	    // Do your charge fire stuff here, call ShootEffects, play sounds, etc
 
 		if ( !TakeAmmo (5) )
@@ -97,7 +86,7 @@ partial class shitthrower : BaseDmWeapon
 			return;
         }
 
-		ShootEffects();
+		//ShootEffects();
 		PlaySound ( "shoot_big" );
 
 		if ( IsClient ) return;
@@ -116,18 +105,18 @@ partial class shitthrower : BaseDmWeapon
 			TimeSinceChargeStart = 0;
 			return;
 		}
-		
+
 		// Don't do anything if we don't have the ammo for it or player is dead
 		if ( AvailableAmmo() < 5 || Owner.Health <= 0 || !Owner.IsValid() )
 		{
 			StopCharge();
 			return;
 		}
-		
+
 		// We just started charging, so spawn particles & stuff
 		if ( Input.Pressed( InputButton.Attack2 ) || TimeSinceChargeStart.Relative.AlmostEqual( 0 ) )
 			StartCharge();
-		
+
 		if ( !Input.Down( InputButton.Attack2 ) )
 			TimeSinceChargeStart = 0;
 

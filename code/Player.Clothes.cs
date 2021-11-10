@@ -2,10 +2,7 @@
 using System;
 using System.Linq;
 
-public class ClothingEntity : ModelEntity
-{
-
-}
+public class ClothingEntity : ModelEntity { }
 
 partial class DeathmatchPlayer
 {
@@ -30,7 +27,7 @@ partial class DeathmatchPlayer
 			{
 				"models/citizen_clothes/trousers/trousers.jeans.vmdl",
 				"models/citizen_clothes/dress/dress.kneelength.vmdl",
-				"models/citizen/clothes/trousers_tracksuit.vmdl",
+				"models/citizen_clothes/trousers/trousers_tracksuit.vmdl",
 				"models/citizen_clothes/shoes/shorts.cargo.vmdl",
 				"models/citizen_clothes/trousers/trousers.lab.vmdl"
 			} );
@@ -40,6 +37,7 @@ partial class DeathmatchPlayer
 			pants.SetParent( this, true );
 			pants.EnableShadowInFirstPerson = true;
 			pants.EnableHideInFirstPerson = true;
+			pants.Tags.Add("clothes");
 
 			if ( model.Contains( "dress" ) )
 				jacket = pants;
@@ -59,6 +57,7 @@ partial class DeathmatchPlayer
 			jacket.SetParent( this, true );
 			jacket.EnableShadowInFirstPerson = true;
 			jacket.EnableHideInFirstPerson = true;
+			jacket.Tags.Add("clothes");
 		}
 
 		if ( Rand.Int( 0, 3 ) != 1 )
@@ -68,15 +67,17 @@ partial class DeathmatchPlayer
 			shoes.SetParent( this, true );
 			shoes.EnableShadowInFirstPerson = true;
 			shoes.EnableHideInFirstPerson = true;
+			shoes.Tags.Add("clothes");
 		}
 
-		if ( dressed ) ;
+		if ( dressed )
 		{
 			hat = new ClothingEntity();
 			hat.SetModel( "models/poopemoji/poopemoji_hat.vmdl" );
 			hat.SetParent( this, true );
 			hat.EnableShadowInFirstPerson = true;
 			hat.EnableHideInFirstPerson = true;
+			hat.Tags.Add("clothes");
 		}
 	}
 }

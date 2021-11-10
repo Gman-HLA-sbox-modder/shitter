@@ -3,7 +3,7 @@ using System;
 
 class Poojectile : Prop
 {
-	public Entity Weapon { get; set; }	
+	public Entity Weapon { get; set; }
 
 	public override void ClientSpawn()
 	{

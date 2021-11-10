@@ -30,15 +30,14 @@
 		flex-grow: 1;
 	}
 
-	.deaths, .kills, .ping, .fps
+	.deaths, .kills, .ping
 	{
 		width: 90px;
 		text-align: right;
 	}
 
-	.ping, .fps
+	.ping
 	{
-		opacity: 0.3;
 		width: 50px;
 	}
 
@@ -49,13 +48,13 @@
 
 	.header
 	{
-		font-weight: 500;
-		border-bottom: 3px solid #fc0;
+		font-weight: 700;
+		border-bottom: 3px solid #b66c33;//#fc0;
 		min-width: 30%;
 		margin-bottom: 10px;
 		padding-bottom: 5px;
-		color: #fc0;
-		mix-blend-mode: lighten;
+		color: #b66c33;//#fc0;
+		text-stroke: 4px rgb(40, 40, 40);
 	}
 
 	.canvas

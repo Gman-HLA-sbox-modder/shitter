@@ -9,6 +9,7 @@ partial class DeathmatchPlayer : Player
 	TimeSince timeSinceDropped;
 
 	public bool SupressPickupNotices { get; private set; }
+	public Clothing.Container Clothing { get; protected set; }
 
 	public DeathmatchPlayer()
 	{
@@ -19,14 +20,18 @@ partial class DeathmatchPlayer : Player
 	{
 		SetModel( "models/citizen/citizen.vmdl" );
 
-		Controller = new WalkController();
+		Controller = new PlayerController();
 		Animator = new StandardPlayerAnimator();
 		Camera = new FirstPersonCamera();
-		  
-		EnableAllCollisions = true; 
-		EnableDrawing = true; 
+
+		EnableAllCollisions = true;
+		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
+		foreach (var child in Children)
+		{
+			child.EnableDrawing = true;
+		}
 
 		Dress();
 		ClearAmmo();
@@ -65,17 +70,17 @@ partial class DeathmatchPlayer : Player
 
 		EnableAllCollisions = false;
 		EnableDrawing = false;
+		foreach (var child in Children)
+		{
+			child.EnableDrawing = false;
+		}
 
-		_ = Particles.Create( "particles/shitexplode.vpcf", Position + (Vector3.Up * (8)));
+		_ = Particles.Create( "particles/shitexplode.vpcf", Position + (Vector3.Up * 8));
 		Sound.FromWorld( "splat", Position );
 	}
 
-
 	public override void Simulate( Client cl )
 	{
-		//if ( cl.NetworkIdent == 1 )
-		//	return;
-
 		base.Simulate( cl );
 
 		//
@@ -110,7 +115,7 @@ partial class DeathmatchPlayer : Player
 			{
 				if ( dropped.PhysicsGroup != null )
 				{
-					dropped.PhysicsGroup.Velocity = Velocity + (EyeRot.Forward + EyeRot.Up) * 300;
+					dropped.PhysicsGroup.Velocity = Velocity + ((EyeRot.Forward + EyeRot.Up) * 300);
 				}
 
 				timeSinceDropped = 0;
@@ -218,8 +223,6 @@ partial class DeathmatchPlayer : Player
 	//	tx.AddRotation( 0, 0, lean * -0.1f );
 
 	//	Hud.CurrentPanel.Style.Transform = tx;
-	//	Hud.CurrentPanel.Style.Dirty(); 
-
 	}
 
 	DamageInfo LastDamage;

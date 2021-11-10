@@ -5,8 +5,7 @@ using System.Linq;
 
 partial class DeathmatchPlayer
 {
-	[Net]
-	public List<int> Ammo { get; set; } = new (); // todo - networkable dictionaries
+	[Net] public IList<int> Ammo { get; set; }
 
 	public void ClearAmmo()
 	{

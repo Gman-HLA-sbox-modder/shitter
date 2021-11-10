@@ -33,8 +33,7 @@ partial class BaseDmWeapon : BaseWeapon, IRespawnableEntity
 
 	public int AvailableAmmo()
 	{
-		var owner = Owner as DeathmatchPlayer;
-		if ( owner == null ) return 0;
+		if ( !(Owner is DeathmatchPlayer owner) ) return 0;
 		return owner.AmmoCount( AmmoType );
 	}
 

@@ -24,7 +24,6 @@ namespace Sandbox.UI
 							.Run();
 
 			panel.PositionAtWorld( tr.EndPos );
-			
 		}
 
 		public static void PositionAtWorld( this Panel panel, Vector3 pos )
@@ -36,8 +35,6 @@ namespace Sandbox.UI
 
 			panel.Style.Left = Length.Fraction( screenpos.x );
 			panel.Style.Top = Length.Fraction( screenpos.y );
-			panel.Style.Dirty();
 		}
 	}
-	
 }

@@ -4,12 +4,7 @@ using System.Linq;
 
 partial class DmInventory : BaseInventory
 {
-
-
-	public DmInventory( Player player ) : base ( player )
-	{
-
-	}
+	public DmInventory( Player player ) : base ( player ) { }
 
 	public override bool Add( Entity ent, bool makeActive = false )
 	{
@@ -48,7 +43,6 @@ partial class DmInventory : BaseInventory
 			Sound.FromWorld( "pickup", ent.Position );
 			PickupFeed.OnPickup( To.Single( player ), $"{ent.ClassInfo.Title}" ); 
 		}
-
 
 		ItemRespawn.Taken( ent );
 		return base.Add( ent, makeActive );

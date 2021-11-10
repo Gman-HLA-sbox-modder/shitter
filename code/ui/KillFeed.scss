@@ -47,8 +47,9 @@ KillFeedEntry
 
 	.icon
 	{
-		width: 100px;
-		height: 100px;
+		top: -110%;
+		width: 70px;
+		height: 70px; //100
 		background-size: 100%;
 		background-image-tint: red;
 	}

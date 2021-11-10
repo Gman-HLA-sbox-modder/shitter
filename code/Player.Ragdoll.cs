@@ -6,18 +6,20 @@ partial class DeathmatchPlayer
 {
 	// TODO - make ragdolls one per entity
 	// TODO - make ragdolls dissapear after a load of seconds
-	static EntityLimit RagdollLimit = new EntityLimit { MaxTotal = 20 };
+	static EntityLimit RagdollLimit = new() { MaxTotal = 20 };
 
 	[ClientRpc]
 	void BecomeRagdollOnClient( Vector3 force, int forceBone )
 	{
 		// TODO - lets not make everyone write this shit out all the time
 		// maybe a CreateRagdoll<T>() on ModelEntity?
-		var ent = new ModelEntity();
-		ent.Position = Position;
-		ent.Rotation = Rotation;
-		ent.MoveType = MoveType.Physics;
-		ent.UsePhysicsCollision = true;
+		var ent = new ModelEntity
+		{
+			Position = Position,
+			Rotation = Rotation,
+			MoveType = MoveType.Physics,
+			UsePhysicsCollision = true
+		};
 		ent.SetInteractsAs( CollisionLayer.Debris );
 		ent.SetInteractsWith( CollisionLayer.WORLD_GEOMETRY );
 		ent.SetInteractsExclude( CollisionLayer.Player | CollisionLayer.Debris );
@@ -31,14 +33,13 @@ partial class DeathmatchPlayer
 		// Copy the clothes over
 		foreach ( var child in Children )
 		{
+			if ( !child.Tags.Has( "clothes" ) )
+				continue;
+
 			if ( child is ModelEntity e )
 			{
-				var model = e.GetModelName();
-				if ( model != null && !model.Contains( "clothes" ) ) // Uck we 're better than this, entity tags, entity type or something?
-					continue;
-
 				var clothing = new ModelEntity();
-				clothing.SetModel( model );
+				clothing.SetModel( e.GetModel() );
 				clothing.SetParent( ent, true );
 			}
 		}
@@ -57,7 +58,6 @@ partial class DeathmatchPlayer
 				ent.PhysicsGroup.AddVelocity( force );
 			}
 		}
-
 
 		Corpse = ent;
 

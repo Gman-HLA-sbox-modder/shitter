@@ -20,7 +20,7 @@ inventorycolumn
 {
 	margin-right: 5px;
 	mix-blend-mode: lighten;
-	color: #fc0;
+	color: #8f552a;//#fc0;
 	flex-direction: column;
 	align-items: flex-start; // align to the left, don't stretch
 
@@ -80,7 +80,7 @@ inventoryicon
 {
 	margin-top: 5px;
 	mix-blend-mode: lighten;
-	color: #fc0;
+	color: #8f552a;//#fc0;
 	background-color: #fa04;
 	font-size: 40px;
 	font-weight: lighter;
@@ -94,7 +94,7 @@ inventoryicon
 		width: 150px;
 		height: 150px;
 		background-size: 100%;
-		background-image-tint: #fa0;
+		background-image-tint: #8f552a;//#fa0;
 		position: absolute;
 	}
 

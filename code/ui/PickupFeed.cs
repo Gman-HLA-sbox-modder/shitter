@@ -1,5 +1,4 @@
-﻿
-using Sandbox;
+﻿using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
@@ -24,7 +23,7 @@ public partial class PickupFeed : Panel
 		// TODO - icons for weapons?
 		// TOPO - icons for ammo?
 
-		Current?.AddEntry( $"\n{text}" );		
+		Current?.AddEntry( $"\n{text}" );
 	}
 
 	/// <summary>

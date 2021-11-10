@@ -47,7 +47,6 @@ partial class SMPoo : BaseDmWeapon
 		//ShootBullet( 0.1f, 1.5f, 5.0f, 3.0f );
 		if (IsClient) return;
 		ShootShit(true);
-
 	}
 
 	public override void AttackSecondary()
@@ -78,21 +77,16 @@ partial class SMPoo : BaseDmWeapon
 		anim.SetParam( "aimat_weight", 1.0f );
 	}
 
-	public override void Simulate(Client owner)
-	{
-		base.Simulate(owner);
-	}
-
 	void ShootShit(bool isBig = false)
 	{
 		var ent = new Poojectile
 		{
-			Position = Owner.EyePos + Owner.EyeRot.Forward * (isBig ? 70 : 40),
+			Position = Owner.EyePos + (Owner.EyeRot.Forward * (isBig ? 70 : 40)),
 			Rotation = Owner.EyeRot,
 			Weapon = this
 		};
 
-		ent.SetModel($"models/poopemoji/poopemoji_small.vmdl");
+		ent.SetModel("models/poopemoji/poopemoji_small.vmdl");
 		ent.Velocity = Owner.EyeRot.Forward * 10000;
 		ent.Scale = .2f;
 	}
