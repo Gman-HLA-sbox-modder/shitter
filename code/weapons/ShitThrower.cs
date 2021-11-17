@@ -9,8 +9,8 @@ partial class shitthrower : BaseDmWeapon
 	public override float PrimaryRate => 15.0f;
 	public override float SecondaryRate => 1.0f;
 	public override AmmoType AmmoType => AmmoType.Shit;
-	public override int ClipSize => 69;
 	public override float ReloadTime => 3.0f;
+	public override bool UseClip => false;
 
 	public override int Bucket => 1;
 
@@ -21,9 +21,9 @@ partial class shitthrower : BaseDmWeapon
 	public override void Spawn()
 	{
 		base.Spawn();
+		AmmoClip = 50;
 
 		SetModel("models/poopemoji/poopemoji_w.vmdl");
-		AmmoClip = 100;
 	}
 
 	public override bool CanPrimaryAttack()
@@ -48,6 +48,18 @@ partial class shitthrower : BaseDmWeapon
 		TimeSinceChargeStart = 0;
 	}
 
+	public bool TakeAmmo( int amount )
+	{
+		if ( Owner is not DeathmatchPlayer player )
+			return false;
+
+		if ( player.AmmoCount(AmmoType) < amount )
+			return false;
+
+		player.TakeAmmo( AmmoType, amount );
+		return true;
+	}
+	
 	public override void AttackPrimary()
 	{
 		TimeSincePrimaryAttack = -0.5f;
@@ -140,7 +152,8 @@ partial class shitthrower : BaseDmWeapon
 		{
 			Position = Owner.EyePos + Owner.EyeRot.Forward * (isBig ? 70 : 40),
 			Rotation = Owner.EyeRot,
-			Weapon = this
+			Weapon = this,
+			DamageMultiplier = isBig ? 20f : 1.7f
 		};
 
 		ent.SetModel($"models/poopemoji/poopemoji{(isBig ? "_big" : "")}.vmdl");

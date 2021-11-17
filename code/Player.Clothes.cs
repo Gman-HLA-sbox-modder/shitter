@@ -70,14 +70,14 @@ partial class DeathmatchPlayer
 			shoes.Tags.Add("clothes");
 		}
 
-		if ( dressed )
-		{
-			hat = new ClothingEntity();
-			hat.SetModel( "models/poopemoji/poopemoji_hat.vmdl" );
-			hat.SetParent( this, true );
-			hat.EnableShadowInFirstPerson = true;
-			hat.EnableHideInFirstPerson = true;
-			hat.Tags.Add("clothes");
-		}
+		if ( !dressed )
+			return;
+
+		hat = new ClothingEntity();
+		hat.SetModel( "models/poopemoji/poopemoji_hat.vmdl" );
+		hat.SetParent( this, true );
+		hat.EnableShadowInFirstPerson = true;
+		hat.EnableHideInFirstPerson = true;
+		hat.Tags.Add("clothes");
 	}
 }

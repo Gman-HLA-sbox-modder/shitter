@@ -2,15 +2,36 @@
 using System;
 using System.Linq;
 
-[Library( "shitter", Title = "Shitter" )]
 partial class DeathmatchGame : Game
 {
 	public DeathmatchHud DeathmatchHud;
 
 	public DeathmatchGame()
 	{
-		if ( IsClient ) { DeathmatchHud = new(); }
+		if ( !IsClient )
+			return;
+
+		DeathmatchHud = new();
+		//InitPostProcess();
 	}
+	/*
+	private Material _postProcessMaterial;
+
+	public void InitPostProcess()
+	{
+		_postProcessMaterial = Material.Load("materials/cum_postprocess.vmat");
+	}
+
+	[Event("render.postprocess")]
+	public void PostProcess()
+	{
+		if(_postProcessMaterial != null)
+		{
+			//Render.CopyFrameBuffer(false);
+			//Render.Material = _postProcessMaterial;
+			//Render.DrawScreenQuad();
+		}
+	}*/
 
 	public override void PostLevelLoaded()
 	{

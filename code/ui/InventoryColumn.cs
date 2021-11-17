@@ -24,12 +24,12 @@ public class InventoryColumn : Panel
 	internal void UpdateWeapon( BaseDmWeapon weapon )
 	{
 		var icon = ChildrenOfType<InventoryIcon>().FirstOrDefault( x => x.Weapon == weapon );
-		if ( icon == null )
-		{
-			icon = new InventoryIcon( weapon );
-			icon.Parent = this;
-			Icons.Add( icon );
-		}
+		if ( icon != null )
+			return;
+
+		icon = new InventoryIcon( weapon );
+		icon.Parent = this;
+		Icons.Add( icon );
 	}
 
 	internal void TickSelection( BaseDmWeapon selectedWeapon )

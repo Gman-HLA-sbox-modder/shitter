@@ -10,7 +10,7 @@ partial class SMPoo : BaseDmWeapon
 	public override float PrimaryRate => 5.0f;
 	public override float SecondaryRate => 1.0f;
 	public override AmmoType AmmoType => AmmoType.Shit;
-	public override int ClipSize => -1;
+	public override int ClipSize => 100;
 	public override float ReloadTime => 4.0f;
 	public override int Bucket => 2;
 
@@ -33,18 +33,13 @@ partial class SMPoo : BaseDmWeapon
 			return;
 		}
 
-		(Owner as AnimEntity).SetAnimBool( "b_attack", true );
-
-		//
+		(Owner as AnimEntity)?.SetAnimBool( "b_attack", true );
+		
 		// Tell the clients to play the shoot effects
-		//
 		ShootEffects();
 		PlaySound( "shoot" );
-
-		//
+		
 		// Shoot the bullets
-		//
-		//ShootBullet( 0.1f, 1.5f, 5.0f, 3.0f );
 		if (IsClient) return;
 		ShootShit(true);
 	}
@@ -83,7 +78,8 @@ partial class SMPoo : BaseDmWeapon
 		{
 			Position = Owner.EyePos + (Owner.EyeRot.Forward * (isBig ? 70 : 40)),
 			Rotation = Owner.EyeRot,
-			Weapon = this
+			Weapon = this,
+			DamageMultiplier = 1f
 		};
 
 		ent.SetModel("models/poopemoji/poopemoji_small.vmdl");

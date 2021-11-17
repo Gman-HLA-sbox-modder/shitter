@@ -4,6 +4,7 @@ using System;
 class Poojectile : Prop
 {
 	public Entity Weapon { get; set; }
+	public float DamageMultiplier { get; set; }
 
 	public override void ClientSpawn()
 	{
@@ -23,26 +24,28 @@ class Poojectile : Prop
 
 		float speed = eventData.Speed;
 
-		if (speed > minImpactSpeed)
-		{
-			// I take damage from high speed impacts
-			if (Health > 0)
-			{
-				var damage = speed / minImpactSpeed * impactDmg;
-				TakeDamage(DamageInfo.Generic(damage).WithFlag(DamageFlags.PhysicsImpact));
-			}
+		if ( !(speed > minImpactSpeed) )
+			return;
 
-			// Whatever I hit takes more damage
-			if (eventData.Entity.IsValid() && eventData.Entity != this)
-			{
-				var damage = speed / minImpactSpeed * impactDmg * 1.2f;
-				eventData.Entity.TakeDamage(DamageInfo.Generic(damage)
-					.WithFlag(DamageFlags.PhysicsImpact)
-					.WithWeapon(Weapon)
-					.WithAttacker(Weapon.Owner)
-					.WithPosition(eventData.Pos)
-					.WithForce(eventData.PreVelocity));
-			}
+		// I take damage from high speed impacts
+		if (Health > 0)
+		{
+			var damage = speed / minImpactSpeed * impactDmg;
+			TakeDamage(DamageInfo.Generic(damage).WithFlag(DamageFlags.PhysicsImpact)); //poojectile takes damage
+		}
+
+		// Whatever I hit takes more damage
+		if ( !eventData.Entity.IsValid() || eventData.Entity == this )
+			return;
+
+		{
+			var damage = speed / minImpactSpeed * DamageMultiplier; // * impactDmg;// * 1.2f;
+			eventData.Entity.TakeDamage(DamageInfo.Generic(damage)
+				.WithFlag(DamageFlags.PhysicsImpact)
+				.WithWeapon(Weapon)
+				.WithAttacker(Weapon.Owner)
+				.WithPosition(eventData.Pos)
+				.WithForce(eventData.PreVelocity));
 		}
 	}
 }

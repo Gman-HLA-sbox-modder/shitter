@@ -36,12 +36,12 @@ partial class DeathmatchPlayer
 			if ( !child.Tags.Has( "clothes" ) )
 				continue;
 
-			if ( child is ModelEntity e )
-			{
-				var clothing = new ModelEntity();
-				clothing.SetModel( e.GetModel() );
-				clothing.SetParent( ent, true );
-			}
+			if ( child is not ModelEntity e )
+				continue;
+
+			var clothing = new ModelEntity();
+			clothing.SetModel( e.GetModel() );
+			clothing.SetParent( ent, true );
 		}
 
 		ent.PhysicsGroup.AddVelocity( force );

@@ -18,10 +18,8 @@ partial class DmViewModel : BaseViewModel
 	private void AddCameraEffects( ref CameraSetup camSetup )
 	{
 		Rotation = Local.Pawn.EyeRot;
-
-		//
+		
 		// Bob up and down based on our walk movement
-		//
 		var speed = Owner.Velocity.Length.LerpInverse( 0, 320 );
 		var left = camSetup.Rotation.Left;
 		var up = camSetup.Rotation.Up;

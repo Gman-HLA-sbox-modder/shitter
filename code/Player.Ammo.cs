@@ -16,9 +16,7 @@ partial class DeathmatchPlayer
 	{
 		var iType = (int)type;
 		if ( Ammo == null ) return 0;
-		if ( Ammo.Count <= iType ) return 0;
-
-		return Ammo[(int)type];
+		return Ammo.Count <= iType ? 0 : Ammo[(int)type];
 	}
 
 	public bool SetAmmo( AmmoType type, int amount )

@@ -23,7 +23,7 @@ partial class CrossbowBolt : ModelEntity
 		if ( Stuck )
 			return;
 
-		float Speed = 10000.0f;
+		var Speed = 10000.0f;
 		var velocity = Rotation.Forward * Speed;
 
 		var start = Position;

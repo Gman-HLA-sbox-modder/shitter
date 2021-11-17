@@ -21,12 +21,18 @@ public class Ammo : Panel
 		var weapon = player.ActiveChild as BaseDmWeapon;
 		SetClass( "active", weapon != null );
 
-		if ( weapon == null ) return;
+		if ( weapon == null )
+		{
+			Style.Opacity = 0f;
+			return;
+		}
 
-		Weapon.Text = $"{weapon.AmmoClip}";
+		Style.Opacity = 1f;
+		Weapon.Text = $"{weapon.AmmoClip} / ";
+		Weapon.Style.Opacity = weapon.UseClip ? 1f : 0f;
 
 		var inv = weapon.AvailableAmmo();
-		Inventory.Text = $" / {inv}";
+		Inventory.Text = inv.ToString();
 		Inventory.SetClass( "active", inv >= 0 );
 	}
 }

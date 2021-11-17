@@ -31,7 +31,9 @@ partial class Crossbow : BaseDmWeapon
 
 		ShootEffects();
 
-		if ( IsServer )
+		if ( !IsServer )
+			return;
+
 		using ( Prediction.Off() )
 		{
 			var bolt = new CrossbowBolt();

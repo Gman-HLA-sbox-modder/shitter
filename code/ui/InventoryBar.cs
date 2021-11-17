@@ -133,13 +133,7 @@ public class InventoryBar : Panel
 
 		// Are we already selecting a weapon with this column?
 		var firstOfColumn = Weapons.Where( x => x.Bucket == columninput ).OrderBy( x => x.BucketWeight ).FirstOrDefault();
-		if ( firstOfColumn  == null )
-		{
-			// DOOP sound
-			return SelectedIndex;
-		}
-
-		return Weapons.IndexOf( firstOfColumn );
+		return firstOfColumn  == null ? SelectedIndex : Weapons.IndexOf( firstOfColumn );
 	}
 
 	int NextInBucket()
@@ -150,7 +144,7 @@ public class InventoryBar : Panel
 		BaseDmWeapon prev = null;
 		foreach ( var weapon in Weapons.Where( x => x.Bucket == SelectedWeapon.Bucket ).OrderBy( x => x.BucketWeight ) )
 		{
-			if ( first == null ) first = weapon;
+			first ??= weapon;
 			if ( prev == SelectedWeapon ) return Weapons.IndexOf( weapon );
 			prev = weapon;
 		}

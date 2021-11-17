@@ -7,19 +7,14 @@ partial class CoomLauncher : BaseDmWeapon
 	public override string ViewModelPath => "weapons/rust_pistol/v_rust_pistol.vmdl";
 
 	public override float PrimaryRate => 15.0f;
-	//public override float SecondaryRate => 1.0f;
 	public override AmmoType AmmoType => AmmoType.Cum;
-	public override int ClipSize => 69;
+	public override int ClipSize => 100;
 	public override float ReloadTime => 3.0f;
 
 	Sound? currentSound;
 	Vector3 PooPos;
 
 	public override int Bucket => 1;
-
-	//public TimeSince TimeSinceChargeStart;
-	//public float ChargeTime => 2.0f; // How long the user needs to press Attack2 before shitting
-	//private Particles ChargeParticles;
 
 	private AnimEntity player => Owner as AnimEntity;
 
@@ -60,32 +55,11 @@ partial class CoomLauncher : BaseDmWeapon
 	{
 		base.Simulate( owner );
 
-		if ( IsReloading )
-		{
-			// Reset timers so that people don't mess with them while reloading
-			TimeSincePrimaryAttack = 0;
-			TimeSinceSecondaryAttack = 0;
-			//TimeSinceChargeStart = 0;
+		if ( !IsReloading )
 			return;
-		}
 
-		// Don't do anything if we don't have the ammo for it or player is dead
-		// if ( AvailableAmmo() < 5 || Owner.Health <= 0 || !Owner.IsValid() )
-		// {
-		// 	StopCharge();
-		// 	return;
-		// }
-
-		// We just started charging, so spawn particles & stuff
-		// if ( Input.Pressed( InputButton.Attack2 ) || TimeSinceChargeStart.Relative.AlmostEqual( 0 ) )
-		// 	StartCharge();
-
-		// if ( !Input.Down( InputButton.Attack2 ) )
-		// 	TimeSinceChargeStart = 0;
-
-		// No longer charging
-		// if ( Input.Released( InputButton.Attack2 ) )
-		// 	StopCharge();
+		// Reset timers so that people don't mess with them while reloading
+		TimeSincePrimaryAttack = 0;
 	}
 
 	void ShootShit()
@@ -94,7 +68,8 @@ partial class CoomLauncher : BaseDmWeapon
 		{
 			Position = Owner.EyePos + (Owner.EyeRot.Forward * 40),
 			Rotation = Owner.EyeRot,
-			Weapon = this
+			Weapon = this,
+			DamageMultiplier = 1.3f
 		};
 
 		ent.SetModel("models/cum.vmdl");
