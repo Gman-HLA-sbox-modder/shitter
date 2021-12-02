@@ -48,7 +48,7 @@ partial class shitthrower : BaseDmWeapon
 		TimeSinceChargeStart = 0;
 	}
 
-	public bool TakeAmmo( int amount )
+	private bool TakeAmmoShit( int amount )
 	{
 		if ( Owner is not DeathmatchPlayer player )
 			return false;
@@ -66,7 +66,7 @@ partial class shitthrower : BaseDmWeapon
 
 		(Owner as AnimEntity)?.SetAnimBool("b_attack", true);
 
-		if ( !TakeAmmo( 1 ) )
+		if ( !TakeAmmoShit( 1 ) )
 		{
 			DryFire();
 			return;
@@ -84,7 +84,7 @@ partial class shitthrower : BaseDmWeapon
 	    TimeSincePrimaryAttack = 0;
 	    TimeSinceChargeStart = 0;
 
-	    if ( !TakeAmmo( 1 ) )
+	    if ( !TakeAmmoShit( 1 ) )
 	    {
 		    DryFire();
 		    return;
@@ -92,7 +92,7 @@ partial class shitthrower : BaseDmWeapon
 
 	    // Do your charge fire stuff here, call ShootEffects, play sounds, etc
 
-		if ( !TakeAmmo (5) )
+		if ( !TakeAmmoShit (5) )
         {
 			DryFire();
 			return;

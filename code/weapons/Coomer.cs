@@ -11,9 +11,6 @@ partial class CoomLauncher : BaseDmWeapon
 	public override int ClipSize => 100;
 	public override float ReloadTime => 3.0f;
 
-	Sound? currentSound;
-	Vector3 PooPos;
-
 	public override int Bucket => 1;
 
 	private AnimEntity player => Owner as AnimEntity;
