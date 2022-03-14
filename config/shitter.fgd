@@ -56,7 +56,7 @@
 //
 // SMPoo
 //
-@PointClass base(BaseProperties_shitter) editormodel( "weapons/rust_smg/rust_smg.vmdl" ) = dm_smg : ""
+@PointClass base(BaseProperties_shitter) editormodel( "weapons/rust_smg/rust_smg.vmdl" ) = shitter_smpoo : ""
 [
 	enable_shadows(boolean) { group = "Rendering" } : "Shadow Casting" : 1 : "Whether this entity should cast shadows or not"
 

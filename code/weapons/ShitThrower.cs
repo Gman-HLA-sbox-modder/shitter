@@ -5,7 +5,7 @@
 partial class shitthrower : BaseDmWeapon
 { 
 	public override string ViewModelPath => "models/poopemoji/poopemoji_v.vmdl";
-
+	public override int Damage => 75;
 	public override float PrimaryRate => 15.0f;
 	public override float SecondaryRate => 1.0f;
 	public override AmmoType AmmoType => AmmoType.Shit;
@@ -64,7 +64,7 @@ partial class shitthrower : BaseDmWeapon
 	{
 		TimeSincePrimaryAttack = -0.5f;
 
-		(Owner as AnimEntity)?.SetAnimBool("b_attack", true);
+		(Owner as AnimEntity)?.SetAnimParameter("b_attack", true);
 
 		if ( !TakeAmmoShit( 1 ) )
 		{
@@ -139,24 +139,22 @@ partial class shitthrower : BaseDmWeapon
 
 	public override void SimulateAnimator(PawnAnimator anim)
 	{
-		anim.SetParam("holdtype", 4); // TODO this is shit
-		anim.SetParam("aimat_weight", 1.0f);
-		anim.SetParam("holdtype_handedness", 0);
-		anim.SetParam("holdtype_pose", 2.25f);
-		anim.SetParam("holdtype_pose_hand", 0.01f);
+		anim.SetAnimParameter("holdtype", 4); // TODO this is shit
+		anim.SetAnimParameter("holdtype_handedness", 0);
+		anim.SetAnimParameter("holdtype_pose", 2.25f);
+		anim.SetAnimParameter("holdtype_pose_hand", 0.01f);
 	}
 
 	void ShootShit(bool isBig = false)
 	{
 		var ent = new Poojectile
 		{
-			Position = Owner.EyePos + Owner.EyeRot.Forward * (isBig ? 70 : 40),
-			Rotation = Owner.EyeRot,
-			Weapon = this,
-			DamageMultiplier = isBig ? 20f : 1.7f
+			Position = Owner.EyePosition + Owner.EyeRotation.Forward * (isBig ? 70 : 40),
+			Rotation = Owner.EyeRotation,
+			Weapon = this
 		};
 
 		ent.SetModel($"models/poopemoji/poopemoji{(isBig ? "_big" : "")}.vmdl");
-		ent.Velocity = Owner.EyeRot.Forward * 10000;
+		ent.Velocity = Owner.EyeRotation.Forward * 10000;
 	}
 }
