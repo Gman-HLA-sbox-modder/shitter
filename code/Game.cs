@@ -12,26 +12,7 @@ partial class DeathmatchGame : Game
 			return;
 
 		DeathmatchHud = new();
-		//InitPostProcess();
 	}
-	/*
-	private Material _postProcessMaterial;
-
-	public void InitPostProcess()
-	{
-		_postProcessMaterial = Material.Load("materials/cum_postprocess.vmat");
-	}
-
-	[Event("render.postprocess")]
-	public void PostProcess()
-	{
-		if(_postProcessMaterial != null)
-		{
-			//Render.CopyFrameBuffer(false);
-			//Render.Material = _postProcessMaterial;
-			//Render.DrawScreenQuad();
-		}
-	}*/
 
 	public override void PostLevelLoaded()
 	{

@@ -70,7 +70,7 @@ public class InventoryBar : Panel
 		// We're not open, but we want to be
 		if ( IsOpen != wantOpen )
 		{
-			SelectedWeapon = Local.Pawn.ActiveChild as BaseDmWeapon;
+			SelectedWeapon = (Local.Pawn as Player).ActiveChild as BaseDmWeapon;
 			IsOpen = true;
 		}
 

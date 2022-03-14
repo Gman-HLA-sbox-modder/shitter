@@ -40,7 +40,7 @@ partial class DeathmatchPlayer
 				continue;
 
 			var clothing = new ModelEntity();
-			clothing.SetModel( e.GetModel() );
+			clothing.Model = e.Model;
 			clothing.SetParent( ent, true );
 		}
 

@@ -3,7 +3,7 @@ using System;
 
 public partial class PlayerController : BasePlayerController
 {
-    [Net] public float SprintSpeed { get; set; } = 320.0f;
+	[Net] public float SprintSpeed { get; set; } = 320.0f;
     [Net] public float WalkSpeed { get; set; } = 150.0f;
     [Net] public float DefaultSpeed { get; set; } = 190.0f;
     [Net] public float Acceleration { get; set; } = 10.0f;
@@ -89,16 +89,16 @@ public partial class PlayerController : BasePlayerController
     {
         base.FrameSimulate();
 
-        EyeRot = Input.Rotation;
+        EyeRotation = Input.Rotation;
     }
 
     public override void Simulate()
     {
-        EyePosLocal = Vector3.Up * (EyeHeight * Pawn.Scale);
+        EyeLocalPosition = Vector3.Up * (EyeHeight * Pawn.Scale);
         UpdateBBox();
 
-        EyePosLocal += TraceOffset;
-        EyeRot = Input.Rotation;
+        EyeLocalPosition += TraceOffset;
+        EyeRotation = Input.Rotation;
 
         RestoreGroundPos();
 
@@ -106,7 +106,7 @@ public partial class PlayerController : BasePlayerController
             return;
 
         CheckLadder();
-        Swimming = Pawn.WaterLevel.Fraction > 0.6f;
+        Swimming = Pawn.WaterLevel > 0.6f;
         
         // Start Gravity
         if ( !Swimming && !IsTouchingLadder )
@@ -250,7 +250,7 @@ public partial class PlayerController : BasePlayerController
 
             if ( pm.Fraction == 1 )
             {
-                Position = pm.EndPos;
+                Position = pm.EndPosition;
                 StayOnGround();
                 return;
             }
@@ -549,7 +549,7 @@ public partial class PlayerController : BasePlayerController
 
         if ( bMoveToEndPos && !pm.StartedSolid && pm.Fraction > 0.0f && pm.Fraction < 1.0f )
         {
-            Position = pm.EndPos;
+            Position = pm.EndPosition;
         }
 
     }
@@ -624,7 +624,7 @@ public partial class PlayerController : BasePlayerController
 
         // See how far up we can go without getting stuck
         var trace = TraceBBox( Position, start );
-        start = trace.EndPos;
+        start = trace.EndPosition;
 
         // Now trace down from a known safe position
         trace = TraceBBox( start, end );
@@ -637,7 +637,7 @@ public partial class PlayerController : BasePlayerController
         // float flDelta = fabs( mv->GetAbsOrigin().z - trace.m_vEndPos.z );
         // if ( flDelta > 0.5f * DIST_EPSILON )
 
-        Position = trace.EndPos;
+        Position = trace.EndPosition;
     }
 
     void RestoreGroundPos()

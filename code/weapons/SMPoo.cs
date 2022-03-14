@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using System;
 
-[Library( "dm_smg", Title = "SMPoo" )]
+[Library( "shitter_smpoo", Title = "SMPoo" )]
 [Hammer.EditorModel( "weapons/rust_smg/rust_smg.vmdl" )]
 partial class SMPoo : BaseDmWeapon
 { 
@@ -33,7 +33,7 @@ partial class SMPoo : BaseDmWeapon
 			return;
 		}
 
-		(Owner as AnimEntity)?.SetAnimBool( "b_attack", true );
+		(Owner as AnimEntity)?.SetAnimParameter( "b_attack", true );
 		
 		// Tell the clients to play the shoot effects
 		ShootEffects();
@@ -62,28 +62,26 @@ partial class SMPoo : BaseDmWeapon
 			new Sandbox.ScreenShake.Perlin(0.5f, 4.0f, 1.0f, 0.5f);
 		}
 
-		ViewModelEntity?.SetAnimBool( "fire", true );
+		ViewModelEntity?.SetAnimParameter( "fire", true );
 		CrosshairPanel?.CreateEvent( "fire" );
 	}
 
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
-		anim.SetParam( "holdtype", 2 ); // TODO this is shit
-		anim.SetParam( "aimat_weight", 1.0f );
+		anim.SetAnimParameter( "holdtype", 2 ); // TODO this is shit
 	}
 
 	void ShootShit(bool isBig = false)
 	{
 		var ent = new Poojectile
 		{
-			Position = Owner.EyePos + (Owner.EyeRot.Forward * (isBig ? 70 : 40)),
-			Rotation = Owner.EyeRot,
-			Weapon = this,
-			DamageMultiplier = 1f
+			Position = Owner.EyePosition + (Owner.EyeRotation.Forward * (isBig ? 70 : 40)),
+			Rotation = Owner.EyeRotation,
+			Weapon = this
 		};
 
 		ent.SetModel("models/poopemoji/poopemoji_small.vmdl");
-		ent.Velocity = Owner.EyeRot.Forward * 10000;
+		ent.Velocity = Owner.EyeRotation.Forward * 10000;
 		ent.Scale = .2f;
 	}
 }

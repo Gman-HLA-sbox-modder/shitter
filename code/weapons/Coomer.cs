@@ -41,7 +41,7 @@ partial class CoomLauncher : BaseDmWeapon
 		// Tell the clients to play the shoot effects
 		ShootEffects();
 		PlaySound( "shoot" );
-		player.SetAnimBool("b_attack", true);
+		player.SetAnimParameter("b_attack", true);
 
 		// Shoot the bullets
 		if (IsClient) return;
@@ -63,13 +63,12 @@ partial class CoomLauncher : BaseDmWeapon
 	{
 		var ent = new Poojectile
 		{
-			Position = Owner.EyePos + (Owner.EyeRot.Forward * 40),
-			Rotation = Owner.EyeRot,
-			Weapon = this,
-			DamageMultiplier = 1.3f
+			Position = Owner.EyePosition + (Owner.EyeRotation.Forward * 40),
+			Rotation = Owner.EyeRotation,
+			Weapon = this
 		};
 
 		ent.SetModel("models/cum.vmdl");
-		ent.Velocity = Owner.EyeRot.Forward * 10000;
+		ent.Velocity = Owner.EyeRotation.Forward * 10000;
 	}
 }

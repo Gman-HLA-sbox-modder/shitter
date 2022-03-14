@@ -1,4 +1,16 @@
 {
-	"sharedassets": "*.*",
-	"ident": "sharpmars.shitter2"
+  "Title": "Shitter 2",
+  "Type": "game",
+  "Org": "sharpmars",
+  "Ident": "shitter2",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "ResourcePaths": [
+    "ui/",
+    "ui/weapons/"
+  ],
+  "HasCode": true,
+  "CodePath": "code",
+  "RootNamespace": "Sandbox"
 }
