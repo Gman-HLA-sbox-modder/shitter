@@ -1,15 +1,12 @@
 {
-  "Title": "Shitter 2",
+  "Title": "Shitter 3 (WORKING TITLE)",
   "Type": "game",
-  "Org": "sharpmars",
-  "Ident": "shitter2",
+  "Org": "gman",
+  "Ident": "shitter3",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
-  "ResourcePaths": [
-    "ui/",
-    "ui/weapons/"
-  ],
+  "ResourcePaths": null,
   "HasCode": true,
   "CodePath": "code",
   "RootNamespace": "Sandbox"
