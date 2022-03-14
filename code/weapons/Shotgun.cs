@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 
 
-[Library( "dm_shotgun", Title = "Shotgun" )]
+[Library( "dm_shotgun", Title = "Shitgun" )]
 [Hammer.EditorModel( "weapons/rust_pumpshotgun/rust_pumpshotgun.vmdl" )]
 partial class Shotgun : BaseDmWeapon
 { 
@@ -27,7 +27,7 @@ partial class Shotgun : BaseDmWeapon
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
 
-		if ( !TakeAmmo( 1 ) )
+		if ( !TakeAmmo( 0 ) )
 		{
 			DryFire();
 			return;
@@ -42,12 +42,9 @@ partial class Shotgun : BaseDmWeapon
 		PlaySound( "rust_pumpshotgun.shoot" );
 
 		//
-		// Shoot the bullets
+		// Shoot the Shit
 		//
-		for ( int i = 0; i < 10; i++ )
-		{
-			ShootBullet( 0.15f, 0.3f, 9.0f, 3.0f );
-		}
+		ShootShit( true );
 	}
 
 	public override void AttackSecondary()
@@ -55,7 +52,7 @@ partial class Shotgun : BaseDmWeapon
 		TimeSincePrimaryAttack = -0.5f;
 		TimeSinceSecondaryAttack = -0.5f;
 
-		if ( !TakeAmmo( 2 ) )
+		if ( !TakeAmmo( 0 ) )
 		{
 			DryFire();
 			return;
@@ -70,12 +67,10 @@ partial class Shotgun : BaseDmWeapon
 		PlaySound( "rust_pumpshotgun.shootdouble" );
 
 		//
-		// Shoot the bullets
+		// Shoot the Shit
 		//
-		for ( int i = 0; i < 20; i++ )
-		{
-			ShootBullet( 0.4f, 0.3f, 8.0f, 3.0f );
-		}
+		ShootShit( true );
+		ShootShit( true );
 	}
 
 	[ClientRpc]
@@ -150,5 +145,19 @@ partial class Shotgun : BaseDmWeapon
 	public override void SimulateAnimator( PawnAnimator anim )
 	{
 		anim.SetAnimParameter( "holdtype", 2 ); // TODO this is shit
+	}
+
+	void ShootShit( bool isBig = false )
+	{
+		var ent = new Poojectile
+		{
+			Position = Owner.EyePosition + (Owner.EyeRotation.Forward * (isBig ? 70 : 40)),
+			Rotation = Owner.EyeRotation,
+			Weapon = this
+		};
+
+		ent.SetModel( "models/poopemoji/poopemoji.vmdl" );
+		ent.Velocity = Owner.EyeRotation.Forward * 1000000;
+		ent.Scale = 1f;
 	}
 }

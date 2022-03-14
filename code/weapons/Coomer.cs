@@ -32,7 +32,7 @@ partial class CoomLauncher : BaseDmWeapon
 	{
 		TimeSincePrimaryAttack = -0.5f;
 
-		if ( !TakeAmmo( 1 ) )
+		if ( !TakeAmmo( 0 ) )
 		{
 			DryFire();
 			return;

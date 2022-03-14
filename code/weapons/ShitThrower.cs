@@ -66,7 +66,7 @@ partial class shitthrower : BaseDmWeapon
 
 		(Owner as AnimEntity)?.SetAnimParameter("b_attack", true);
 
-		if ( !TakeAmmoShit( 1 ) )
+		if ( !TakeAmmoShit( 0 ) )
 		{
 			DryFire();
 			return;

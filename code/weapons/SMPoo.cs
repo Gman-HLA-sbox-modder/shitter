@@ -7,7 +7,7 @@ partial class SMPoo : BaseDmWeapon
 { 
 	public override string ViewModelPath => "weapons/rust_smg/v_rust_smg.vmdl";
 
-	public override float PrimaryRate => 5.0f;
+	public override float PrimaryRate => 9.0f;
 	public override float SecondaryRate => 1.0f;
 	public override AmmoType AmmoType => AmmoType.Shit;
 	public override int ClipSize => 100;
@@ -27,7 +27,7 @@ partial class SMPoo : BaseDmWeapon
 		TimeSincePrimaryAttack = 0;
 		TimeSinceSecondaryAttack = 0;
 
-		if ( !TakeAmmo( 1 ) )
+		if ( !TakeAmmo( 0 ) )
 		{
 			DryFire();
 			return;

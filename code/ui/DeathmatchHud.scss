@@ -60,14 +60,17 @@ ammo
 	color: #8f552a;//#ff0;
 	font-family: Roboto;
 	text-stroke: 8px #4d2e16;
+	opacity: 0;
 
 	label
 	{
 		text-shadow: 0px 0px 20px #4d2e166c;//#f70a;
+		opacity: 0;
 
 		&.danger
 		{
 			color: #f00;
+			opacity: 0;
 		}
 	}
 }

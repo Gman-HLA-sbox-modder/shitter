@@ -38,18 +38,13 @@ partial class DeathmatchPlayer : Player
 
 		SupressPickupNotices = true;
 
-		//if (Rand.Int(0, 2) != 1)
-		//{
-			Inventory.Add(new shitthrower(), true);
-			Inventory.Add(new SMPoo());
-			Inventory.Add(new CoomLauncher());
-		//}
-		//Inventory.Add( new SMG() );
-		//Inventory.Add( new Crossbow() );
+		Inventory.Add(new shitthrower(), true);
+		Inventory.Add(new SMPoo());
+		Inventory.Add(new CoomLauncher());
+		Inventory.Add( new Shotgun() );
+		Inventory.Add( new Crossbow() );
 
 		GiveAmmo( AmmoType.Shit, 100 );
-		//GiveAmmo( AmmoType.Buckshot, 8 );
-		//GiveAmmo( AmmoType.Crossbow, 4 );
 
 		SupressPickupNotices = false;
 		Health = 100;
