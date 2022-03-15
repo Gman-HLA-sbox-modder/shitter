@@ -9,7 +9,6 @@ partial class DeathmatchPlayer : Player
 	TimeSince timeSinceDropped;
 
 	public bool SupressPickupNotices { get; private set; }
-	public Clothing.Container Clothing { get; protected set; }
 
 	public DeathmatchPlayer()
 	{
@@ -33,7 +32,7 @@ partial class DeathmatchPlayer : Player
 			child.EnableDrawing = true;
 		}
 
-		Dress();
+		//Clothing.DressEntity( this );
 		ClearAmmo();
 
 		SupressPickupNotices = true;
